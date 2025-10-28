@@ -541,7 +541,7 @@ class StickerpackEditor extends MusicBeatState
                     versions.text = 'Current Version: ' + modVersion + '\nNew Version: ' + version;
 
                     var updateButton = updateAvailableWindow.findComponent('updateAvailableUpdateButton');
-                    updateButton.onClick = () -> FlxG.openURL('https://github.com/anysad/anysad-notestyle-editor'); //placeholder
+                    updateButton.onClick = () -> FlxG.openURL('https://gamebanana.com/tools/21060');
 
                     var closeButton = updateAvailableWindow.findComponent('updateAvailableCloseButton');
                     closeButton.onClick = () -> windowManager.closeWindow(updateAvailableWindow);
