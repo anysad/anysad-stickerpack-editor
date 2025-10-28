@@ -59,6 +59,9 @@ import haxe.ui.notifications.NotificationManager;
 import haxe.ui.notifications.NotificationType;
 import haxe.io.Bytes;
 
+import openfl.net.URLLoader;
+import openfl.net.URLRequest;
+
 using funkin.util.tools.StringTools;
 using StringTools;
 
@@ -72,6 +75,9 @@ class StickerpackEditor extends MusicBeatState
 
     var menuBar:MenuBar;
     var saveStickerpackMenuItem:MenuItem;
+    var exitMenuItem:MenuItem;
+    // var userGuideMenuItem:MenuItem;
+    var checkForUpdatesMenuItem:MenuItem;
     var menubarTestButton:Button;
 
     var stickerpackDataWindow:Window;
@@ -80,6 +86,7 @@ class StickerpackEditor extends MusicBeatState
     var updateAvailableWindow:Window;
 
     var stickerpacks = [];
+    var modVersion:String = '???';
 
     var stickerpackDropdown:DropDown;
     var stickerpackName:TextField;
@@ -104,7 +111,7 @@ class StickerpackEditor extends MusicBeatState
 
         checkForUpdates();
 
-        var modVersion = PolymodHandler.getAllMods().filter(function(item) {
+        modVersion = PolymodHandler.getAllMods().filter(function(item) {
             return item.title.indexOf("anysad Stickerpack Editor") != -1;
         })[0].modVersion.version.join('.');
 
@@ -136,6 +143,12 @@ class StickerpackEditor extends MusicBeatState
 
         saveStickerpackMenuItem = menuBar.findComponent('saveStickerpack');
         saveStickerpackMenuItem.onClick = () -> saveStickerpack();
+
+        exitMenuItem = menuBar.findComponent('exit');
+        exitMenuItem.onClick = () -> FlxG.switchState(() -> new MainMenuState());
+
+        checkForUpdatesMenuItem = menuBar.findComponent('checkForUpdates');
+        checkForUpdatesMenuItem.onClick = () -> checkForUpdates();
 
         var stickerpackRegistry = new StickerRegistry();
         stickerpackRegistry.loadEntries();
@@ -512,8 +525,8 @@ class StickerpackEditor extends MusicBeatState
     function checkForUpdates():Void
     {
         var urlLoader = new URLLoader();
-        loader.addEventListener("complete", () -> {
-			var version = Json.parse(loader.data).mod_version;
+        urlLoader.addEventListener("complete", () -> {
+			var version = Json.parse(urlLoader.data).mod_version;
 			if (version == null) version = "UNKNOWN";
             if (version != modVersion)
             {
@@ -521,8 +534,17 @@ class StickerpackEditor extends MusicBeatState
                 {
                     updateAvailableWindow = RuntimeComponentBuilder.build(Paths.ui('stickerpack-editor/windows/updateAvailableWindow'));
                     updateAvailableWindow.windowManager = windowManager;
-                    updateAvailableWindow.screenCenter();
                     add(updateAvailableWindow);
+                    updateAvailableWindow.screenCenter();
+
+                    var versions = updateAvailableWindow.findComponent('updateAvailableVersions');
+                    versions.text = 'Current Version: ' + modVersion + '\nNew Version: ' + version;
+
+                    var updateButton = updateAvailableWindow.findComponent('updateAvailableUpdateButton');
+                    updateButton.onClick = () -> FlxG.openURL('https://github.com/anysad/anysad-notestyle-editor'); //placeholder
+
+                    var closeButton = updateAvailableWindow.findComponent('updateAvailableCloseButton');
+                    closeButton.onClick = () -> windowManager.closeWindow(updateAvailableWindow);
                 }
                 else windowManager.closeWindow(updateAvailableWindow);
             }
@@ -538,7 +560,7 @@ class StickerpackEditor extends MusicBeatState
         });
 
         var url = "https://raw.githubusercontent.com/anysad/anysad-stickerpack-editor/refs/heads/main/_polymod_meta.json"; 
-		loader.load(new URLRequest(url));
+		urlLoader.load(new URLRequest(url));
     }
 
     function pressingControl():Bool
