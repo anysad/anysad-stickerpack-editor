@@ -18,6 +18,7 @@ import funkin.input.Cursor;
 import funkin.audio.FunkinSound;
 import funkin.modding.PolymodHandler;
 import funkin.util.FileUtil;
+import funkin.util.WindowUtil;
 
 import haxe.Json;
 import haxe.ui.RuntimeComponentBuilder;
@@ -124,6 +125,8 @@ class StickerpackEditor extends MusicBeatState
 		add(bg);
 
         Cursor.show();
+
+        WindowUtil.setWindowTitle("Friday Night Funkin' Stickerpack Editor");
 
         grpStickers = new FlxTypedGroup();
         add(grpStickers);
@@ -509,6 +512,12 @@ class StickerpackEditor extends MusicBeatState
             var fileString = Json.stringify(currentStickerpackData, null, "\t");
 		    var fileBytes:Bytes = Bytes.ofString(fileString);
             FileUtil.writeBytesToPath(fixPath(path), fileBytes);
+            notificationManager.addNotification({
+                title: "Saved Stickerpack",
+                body: "Successfully saved stickerpack to " + FileUtil.sanitizePath(fixPath(path)),
+                type: NotificationType.Success,
+                expiryMs: 5000
+            });
         }, null, currentStickerpackData.name.toLowerCase().sanitize() + '.json');
     }
 
@@ -567,6 +576,13 @@ class StickerpackEditor extends MusicBeatState
     {
         return FlxG.keys.pressed.CONTROL || FlxG.keys.pressed.WINDOWS;
     }
+
+    function destroy()
+    {
+		super.destroy();
+        Cursor.hide();
+		WindowUtil.setWindowTitle("Friday Night Funkin'");
+	}
 
     function update()
     {
