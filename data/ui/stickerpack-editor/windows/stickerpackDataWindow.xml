@@ -1,0 +1,30 @@
+<window title="Stickerpack Data" width="350" maximizable="false" minimizable="false" closable="false" collapsable="false">
+    <vbox width="100%">
+        <dropdown id="stickerpackDropdown" text="Select Stickerpack" width="100%" searchable="true" />
+    </vbox>
+
+    <menu-separator />
+
+    <vbox width="100%">
+        <grid columns="2" tooltip="Readable name of the sticker set." width="100%">
+            <label text="Name" verticalAlign="center" />
+            <textfield id="stickerpackName" placeholder="Readable name of the pack." width="100%" />
+        </grid>
+        <grid columns="2" tooltip="The artist of the sticker set." width="100%">
+            <label text="Artist" verticalAlign="center" />
+            <textfield id="stickerpackArtist" placeholder="The artist of the pack." width="100%" />
+        </grid>
+    </vbox>
+
+    <menu-separator />
+
+    <vbox width="100%">
+        <label text="Sticker Entries" style="font-size: 17px" verticalAlign="center" horizontalAlign="center" />
+        <listview id="stickerEntryListView" width="100%" height="250" />
+    </vbox>
+
+    <hbox width="100%">
+        <button id="createStickerEntryButton" text="Create Entry" width="100%"/>
+        <button id="deleteStickerEntryButton" text="Delete Entry" width="100%"/>
+    </hbox>
+</window>

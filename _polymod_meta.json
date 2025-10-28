@@ -1,0 +1,17 @@
+{
+  "music": "freakyMenu",
+  "title": "anysad Stickerpack Editor",
+  "description": "An editor that makes life easier by creating stickerpacks (who would have thought???).",
+  "contributors": [
+    {
+      "name": "anysad",
+      "icon": "anysad",
+      "color": "#00b2ff",
+      "roles": "Coder",
+      "url": "https://x.com/realanysad"
+    }
+  ],
+  "api_version": "0.6.4",
+  "mod_version": "0.0.1",
+  "license": "Apache 2.0"
+}

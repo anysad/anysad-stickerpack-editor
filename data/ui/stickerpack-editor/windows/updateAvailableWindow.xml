@@ -1,0 +1,9 @@
+<window title="Update Available" width="250" maximizable="false" minimizable="false" closable="false" collapsable="false">
+    <label text="New Update Available!" style="font-size: 17px" verticalAlign="center" horizontalAlign="center" />
+    <menu-separator />
+    <label text="Current Version: ???\nNew Version: ???" id="updateAvailableVersions" style="font-size: 14px" verticalAlign="center" horizontalAlign="center" textAlign="center" />
+    <hbox width="100%">
+        <button id="updateAvailableUpdateButton" text="Update" width="100%" onClick="FlxG.openURL('https://gamebanana.com/tools/...');"/>
+        <button id="updateAvailableCloseButton" text="Close" width="100%"/>
+    </hbox>
+</window>

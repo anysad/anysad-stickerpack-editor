@@ -1,0 +1,13 @@
+<window title="Edit Sticker" width="250" maximizable="false" minimizable="false" closable="false" collapsable="false">
+    <vbox width="100%">
+        <label text="Asset Path" style="font-size: 17px" verticalAlign="center" horizontalAlign="center" />
+        <textfield id="stickerAssetPath" width="100%" />
+    </vbox>
+
+    <menu-separator />
+
+    <vbox width="100%">
+        <label text="Preview" style="font-size: 17px" verticalAlign="center" horizontalAlign="center" />
+        <image id="stickerPreview" horizontalAlign="center" />
+    </vbox>
+</window>

@@ -1,0 +1,19 @@
+<window title="Sticker Addition" width="350" maximizable="false" minimizable="false" collapsable="false">
+    <vbox width="100%">
+        <label text="Asset Path" style="font-size: 17px" verticalAlign="center" horizontalAlign="center" />
+        <textfield id="stickerAdditionAssetPath" width="100%" />
+    </vbox>
+
+    <menu-separator />
+
+    <vbox width="100%">
+        <label text="Preview" style="font-size: 17px" verticalAlign="center" horizontalAlign="center" />
+        <image id="stickerAdditionPreview" horizontalAlign="center" imageScale="0.5" />
+    </vbox>
+
+    <hbox width="100%">
+        <button id="cancelStickerAdditionButton" text="Cancel" width="80" />
+        <spacer width="100%" />
+        <button id="stickerAdditionButton" text="Confirm" width="80" />
+    </hbox>
+</window>

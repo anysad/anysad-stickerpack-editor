@@ -1,0 +1,26 @@
+import flixel.FlxG;
+import funkin.modding.module.Module;
+import funkin.ui.debug.DebugMenuSubState;
+import funkin.modding.base.ScriptedMusicBeatState;
+
+class StickerpackEditorInjection extends Module
+{
+    public function new()
+    {
+        super('stickerpack-editor-injection');
+    }
+
+    override public function onSubStateOpenEnd(event:StateChangeScriptEvent)
+    {
+        if (Std.isOfType(event.targetState, DebugMenuSubState))
+        {   
+            var state = event.targetState;
+            state.createItem("Sticker Pack Editor", openUnlockState);
+        }
+    }
+
+    public function openUnlockState()
+    {
+        FlxG.switchState(ScriptedMusicBeatState.init('StickerpackEditor'));
+    }
+}
